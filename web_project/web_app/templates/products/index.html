@@ -1,0 +1,32 @@
+{% extends 'layout/main.html' %}
+{% load static %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Lovers day</h3>
+                <hr style="border-color: aqua;">
+            </div>
+
+            {% for item in products %}
+            <div class="col-md4 col-lg-3">
+                <div class="card my-3 products">
+                    <a href="{% url 'product_details' catagory_name item.name %}" class="text-decoration-none text-dark">
+                        {% if item.product_image %}
+                        <img src="{{ item.product_image.url }}" class="card-img-top" alt="{{ item.name }}">
+                        {% else %}
+                        <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Default Image">
+                        {% endif %}
+                        <div class="card-body" >
+                            <h5 class="card-text">{{ item.name }}</h5>
+                            <p class="card-text">Rs {{ item.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'layout/main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'images/f.jpg' %}">
+        </div>
+
+        <div class="carousel-item">
+            <img src="{% static 'images/bir.jpg' %}">
+            <div class="carousel-caption">
+                <p>enjoy your shopping</p>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="{% static 'images/wedding.jpg' %}">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+<section class="py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Trending Products</h3>
+                <hr style="border-color: aqua;">
+            </div>
+
+            {% for item in trending_products %}
+            <div class="col-md-4 col-lg-3">
+                <div class="card my-3 products">
+                    <a href="{% url 'product_details' item.catagory.name item.name %}" class="text-decoration-none text-dark">
+                        {% if item.product_image %}
+                        <img src="{{ item.product_image.url }}" class="card-img-top" alt="{{ item.name }}">
+                        {% else %}
+                        <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Default Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-text">{{ item.name }}</h5>
+                            <p class="card-text">Rs {{ item.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div class="card bg-white p-5 one">
+    <a href="{% url 'collections' %}">
+        <img src="{% static 'images/coll.jpg' %}">
+    
+    <div class="overlay">
+        <h1>"Discover the perfect bouquet for every occasion in our exquisite collection!"</h1>
+    </div>
+</a>
+</div>
+
+
+{% endblock content %}

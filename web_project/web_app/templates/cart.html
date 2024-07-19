@@ -1,0 +1,64 @@
+{% extends 'layout/main.html' %}
+{% load static %}
+{% block content %}
+
+<section class="py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-4">Cart Items</h3>
+                <hr style="border-color: aqua;">
+            </div>
+
+            <div class="col-12">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total Amount</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.product_qty }}</td>
+                            <td>{{ item.product.price }}</td>
+                            <td class="amt">{{ item.total_amount }}</td>
+                            <td><img src="{{ item.product.product_image.url }}"  height="50" width="50" class="img-thumbnail"></td>
+                            <td>
+                                <a href="{% url 'remove_cart' item.id %}" onclick="return confirm('Are you sure you want to remove this item?')" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Remove
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="3" class="text-end"><strong>Total Cost</strong></td>
+                            <td id="cost"></td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12 text-end">
+                <a href="{% url 'order' %}" class="btn btn-success">Place Order</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const amtElements = document.querySelectorAll('.amt');
+        const totalCost = Array.from(amtElements).reduce((acc, curr) => acc + Number(curr.textContent), 0);
+        document.getElementById('cost').textContent = "Rs: " + totalCost;
+    });
+</script>
+
+{% endblock content %}

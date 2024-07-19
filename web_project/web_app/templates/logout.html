@@ -1,0 +1,21 @@
+{% extends 'layout/main.html' %}
+
+{% block content %}
+<section>
+    <div class="container" style="margin-top: 70px;">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-success text-center" role="alert">
+                    <h2>You have successfully logged out</h2>
+                </div>
+                <div class="text-center mt-4">
+                    <h3>Would you like to log in again?</h3>
+                    <a href="{% url 'login' %}" class="btn btn-primary mt-3" style="width: 200px;">Login</a>
+                    <p class="mt-3">or</p>
+                    <a href="{% url 'home' %}" class="btn btn-secondary mt-1"style="width: 200px;">Go back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
