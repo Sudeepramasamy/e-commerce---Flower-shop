@@ -11,7 +11,7 @@ from django.utils import timezone
 def getFileName(request,filname):
     now_time=datetime.datetime.now().strftime("%Y%m%d%H:%M:%S")
     new_filename="%s%s"%(now_time,filname)
-    return os.path.join('uploads/',new_filename)
+    return os.path.join('images/',new_filename)
 
 class Signin(models.Model):
     Name=models.CharField(max_length=20,default="")
